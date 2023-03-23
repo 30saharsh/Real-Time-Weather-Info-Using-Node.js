@@ -12,6 +12,10 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -70,6 +74,73 @@
             Bill Bowerman
           </figcaption>
         </figure>
+        <div
+          class="container"
+          id="data"
+          style="
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            padding: 50px;
+            font-weight: 900;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            /* background-color: red; */
+          "
+        >
+          <div style="width: 100%; height: 100%; position: relative" id="img">
+            <p
+              style="
+                font-size: 100px;
+                color: white;
+                position: absolute;
+                bottom: 1%;
+                top: 60%;
+                padding-left: 12px;
+                font-weight: 500;
+              "
+            >
+              <%= weatherData.current.temp_c%>&deg;
+            </p>
+            <h3
+              style="
+                position: absolute;
+                color: #fff;
+                bottom: 0%;
+                top: 82%;
+                right: 20%;
+              "
+            >
+              <%= weatherData.current.condition.text %>
+            </h3>
+
+            <h1 style="position: absolute; color: white; padding: 12px">
+              <%= weatherData.location.name %> <i class="ri-map-pin-fill"></i>
+            </h1>
+            <% if(weatherData.current.temp_c <= 20){ %>
+            <img
+              style="width: 100%; height: 106%"
+              src="https://plus.unsplash.com/premium_photo-1674752371108-78e63ececaa8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1977&q=80"
+              alt=""
+            />
+            <% } %> <% if(weatherData.current.temp_c >= 20 &&
+            weatherData.current.temp_c <= 27){ %>
+            <img
+              style="width: 100%; height: 100%"
+              src="https://images.unsplash.com/photo-1667348687271-8def2705a62d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              alt=""
+            />
+            <% } %> <% if(weatherData.current.temp_c > 27){ %>
+            <img
+              style="width: 100%; height: 100%"
+              src="https://images.unsplash.com/photo-1595865749889-b37a43c4eba4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1856&q=80"
+              alt=""
+            />
+            <% } %>
+          </div>
+        </div>
         <img
           style="
             width: 100%;
@@ -81,7 +152,6 @@
           src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1774&q=80"
           alt=""
         />
-        
       </div>
 
       <div
@@ -100,16 +170,21 @@
           Search Your Region
         </h1>
         <div id="dropdown">
-          <form class="d-flex" role="search" style="margin: 12px" action="/weather" method="post">
+          <form
+            class="d-flex"
+            role="search"
+            style="margin: 12px"
+            action="/weather"
+            method="post"
+          >
             <input
               class="form-control me-2"
               type="search"
               placeholder="Select Region..."
               aria-label="Search"
-              name="location" 
+              name="location"
             />
-            <input style="border-radius: 1px;" type="submit" value="Search">
-
+            <input style="border-radius: 1px" type="submit" value="Search" />
           </form>
         </div>
       </div>
@@ -127,5 +202,40 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"
+      integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      gsap.from("#data #img p", {
+        x: -300,
+        duration: 1,
+        ease: Expo.easeInOut,
+      });
+      gsap.from("#data #img h3", {
+        x: 800,
+        duration: 1,
+        ease: Expo.easeInOut,
+      });
+      gsap.from("#data #img h1", {
+        x: -300,
+        duration: 1,
+        ease: Expo.easeInOut,
+      });
+      gsap.from("#data #img img", {
+        opacity: 0,
+        duration: 0.4,
+        ease: Expo.easeInOut,
+      });
+      // gsap.from("#img p" , {
+      //     x:-50,
+      //     duration:1,
+      //     delay:0.2,
+      //     ease:Expo.easeInOut
+      // })
+    </script>
   </body>
 </html>

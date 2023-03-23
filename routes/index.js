@@ -9,12 +9,13 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/weather/:city', async function(req, res, next) {
-  const getWeather = async (India) => {
+router.post('/weather', async function(req, res, next) {
+  const location = req.body.location;
+  const getWeather = async () => {
     const options = {
       method: 'GET',
       url: 'https://weatherapi-com.p.rapidapi.com/current.json',
-      params: {q: `${req.params.city}`},
+      params: {q: location},
       headers: {
         'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
         'x-rapidapi-key': '28c93b742amshbb546febf21c2c0p1f3c8ajsn0dc3cb179cc7'
@@ -29,13 +30,15 @@ router.get('/weather/:city', async function(req, res, next) {
       console.error(error);
     }
   };
-  const weatherData = await getWeather(req.params.location);
-  res.render( 'index');
+  const weatherData = await getWeather();
+  res.render('info' , {weatherData});
+  
+  
   
 });
 
 router.get('/about', function(req, res, next) {
-  res.render('index');
+  res.render('about');
 });
 
 router.get('/contact', function(req, res, next) {
