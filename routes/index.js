@@ -19,7 +19,6 @@ router.post('/weather', async function(req, res, next) {
       headers: {
         'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
         'x-rapidapi-key': '28c93b742amshbb546febf21c2c0p1f3c8ajsn0dc3cb179cc7'
-      
       }
     };
   
@@ -33,8 +32,6 @@ router.post('/weather', async function(req, res, next) {
   const weatherData = await getWeather();
   res.render('info' , {weatherData});
   
-  
-  
 });
 
 router.get('/about', function(req, res, next) {
@@ -45,9 +42,6 @@ router.get('/contact', function(req, res, next) {
   res.render('index');
 });
  
-
-
-
 
 
 module.exports = router;
